@@ -1,13 +1,13 @@
-Ext.namespace('Zarafa.plugins.desktop_notifications.js');
+Ext.namespace('Zarafa.plugins.desktopnotifications.js');
 
 /**
- * @class Zarafa.plugins.desktop_notifications.js.DesktopNotifier
+ * @class Zarafa.plugins.desktopnotifications.js.DesktopNotifier
  * @extends Zarafa.core.ui.notifier.NotifyPlugin
  *
  * A plugin for notification plugin to show desktop notifications instead of normal in browser
  * notifications for actions like new mail, reminder etc.
  */
-Zarafa.plugins.desktop_notifications.js.DesktopNotifier = Ext.extend(Zarafa.core.ui.notifier.NotifyPlugin, {
+Zarafa.plugins.desktopnotifications.js.DesktopNotifier = Ext.extend(Zarafa.core.ui.notifier.NotifyPlugin, {
 	/**
 	 * @constructor
 	 * @param {Object} config Configuration object
@@ -16,7 +16,7 @@ Zarafa.plugins.desktop_notifications.js.DesktopNotifier = Ext.extend(Zarafa.core
 	{
 		config = config || {};
 
-		Zarafa.plugins.desktop_notifications.js.DesktopNotifier.superclass.constructor.call(this, config);
+		Zarafa.plugins.desktopnotifications.js.DesktopNotifier.superclass.constructor.call(this, config);
 	},
 
 	/**
@@ -35,16 +35,16 @@ Zarafa.plugins.desktop_notifications.js.DesktopNotifier = Ext.extend(Zarafa.core
 	 */
 	notify : function(category, title, message, config)
 	{
-		Zarafa.plugins.desktop_notifications.js.DesktopNotification.notify(title, {
+		Zarafa.plugins.desktopnotifications.js.DesktopNotification.notify(title, {
 			tag : category,
-			body : message,
-			//icon : '../resources/favicon.ico'
+			body : message/*,
+			icon : '../resources/favicon.ico'*/
 		});
 
-		Zarafa.plugins.desktop_notifications.js.DesktopNotifier.superclass.notify.apply(this, arguments);
+		Zarafa.plugins.desktopnotifications.js.DesktopNotifier.superclass.notify.apply(this, arguments);
 	}
 });
 
 Zarafa.onReady(function() {
-	container.getNotifier().registerPlugin('desktopnotifier', new Zarafa.plugins.desktop_notifications.js.DesktopNotifier());
+	container.getNotifier().registerPlugin('desktopnotifier', new Zarafa.plugins.desktopnotifications.js.DesktopNotifier());
 });

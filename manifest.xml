@@ -3,7 +3,7 @@
 <plugin version="2">
 	<info>
 		<version>1.0</version>
-		<name>desktop_notifications</name>
+		<name>desktopnotifications</name>
 		<title>Desktop Notifications Plugin</title>
 		<author>Saket Patel</author>
 		<authorURL>https://github.com/silentsakky</authorURL>
@@ -15,6 +15,9 @@
 	<components>
 		<component>
 			<files>
+				<server>
+					<serverfile>php/plugin.desktopnotifications.php</serverfile>
+				</server>
 				<client>
 					<clientfile load="release">js/desktopnotifications.js</clientfile>
 					<clientfile load="debug">js/desktopnotifications-debug.js</clientfile>

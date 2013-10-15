@@ -1,12 +1,12 @@
-Ext.namespace('Zarafa.plugins.desktop_notifications.js');
+Ext.namespace('Zarafa.plugins.desktopnotifications.js');
 
 /**
- * @class Zarafa.plugins.desktop_notifications.js.DesktopNotification
+ * @class Zarafa.plugins.desktopnotifications.js.DesktopNotification
  * @singleton
  *
  * Singleton class to provide a wrapper for HTML5 desktop notifications feature
  */
-Zarafa.plugins.desktop_notifications.js.DesktopNotification = (function() {
+Zarafa.plugins.desktopnotifications.js.DesktopNotification = (function() {
 	var notificationAPI = window.webkitNotifications || window.Notification;
 	var PERMISSION = ['granted', 'default', 'denied'];
 

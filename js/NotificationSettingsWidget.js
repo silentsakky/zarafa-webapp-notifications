@@ -1,17 +1,17 @@
-Ext.namespace('Zarafa.plugins.desktop_notifications.js');
+Ext.namespace('Zarafa.plugins.desktopnotifications.js');
 
 /**
- * @class Zarafa.plugins.desktop_notifications.js.NotificationSettingsWidget
+ * @class Zarafa.plugins.desktopnotifications.js.NotificationSettingsWidget
  * @extends Zarafa.settings.ui.SettingsWidget
  * @xtype zarafa.notificationsettingswidget
  *
  * The {@link Zarafa.settings.ui.SettingsWidget widget} for
  * configuring the settings of the plugin
  */
-Zarafa.plugins.desktop_notifications.js.NotificationSettingsWidget = Ext.extend(Zarafa.settings.ui.SettingsWidget, {
+Zarafa.plugins.desktopnotifications.js.NotificationSettingsWidget = Ext.extend(Zarafa.settings.ui.SettingsWidget, {
 
 	/**
-	 * @cfg {Zarafa.plugins.desktop_notifications.js.DesktopNotificationsPlugin} plugin The plugin which has registered this
+	 * @cfg {Zarafa.plugins.desktopnotifications.js.DesktopNotificationsPlugin} plugin The plugin which has registered this
 	 * settings widget.
 	 */
 	plugin : undefined,
@@ -43,7 +43,7 @@ Zarafa.plugins.desktop_notifications.js.NotificationSettingsWidget = Ext.extend(
 			items : this.createPanelItems()
 		});
 
-		Zarafa.plugins.desktop_notifications.js.NotificationSettingsWidget.superclass.constructor.call(this, config);
+		Zarafa.plugins.desktopnotifications.js.NotificationSettingsWidget.superclass.constructor.call(this, config);
 	},
 
 	/**
@@ -71,7 +71,7 @@ Zarafa.plugins.desktop_notifications.js.NotificationSettingsWidget = Ext.extend(
 	 */
 	requestPermission : function()
 	{
-		Zarafa.plugins.desktop_notifications.js.DesktopNotification.authorize(function(perm) {
+		Zarafa.plugins.desktopnotifications.js.DesktopNotification.authorize(function(perm) {
 			// chrome doesn't give us current permission level, so default to granted if permission level is passed
 			var permission = 'granted';
 			if(perm) {
@@ -100,7 +100,7 @@ Zarafa.plugins.desktop_notifications.js.NotificationSettingsWidget = Ext.extend(
 		this.model = settingsModel;
 
 		var disabled = false;
-		if(Zarafa.plugins.desktop_notifications.js.DesktopNotification.hasPermission()) {
+		if(Zarafa.plugins.desktopnotifications.js.DesktopNotification.hasPermission()) {
 			disabled = true;
 		}
 
@@ -108,4 +108,4 @@ Zarafa.plugins.desktop_notifications.js.NotificationSettingsWidget = Ext.extend(
 	}
 });
 
-Ext.reg('zarafa.notificationsettingswidget', Zarafa.plugins.desktop_notifications.js.NotificationSettingsWidget);
+Ext.reg('zarafa.notificationsettingswidget', Zarafa.plugins.desktopnotifications.js.NotificationSettingsWidget);

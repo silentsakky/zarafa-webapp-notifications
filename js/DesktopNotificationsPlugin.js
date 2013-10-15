@@ -1,19 +1,19 @@
-Ext.namespace('Zarafa.plugins.desktop_notifications');
+Ext.namespace('Zarafa.plugins.desktopnotifications');
 
 /**
- * @class Zarafa.plugins.desktop_notifications.DesktopNotificationsPlugin
+ * @class Zarafa.plugins.desktopnotifications.DesktopNotificationsPlugin
  * @extends Zarafa.core.Plugin
  * This class is used for adding files from the users's Dropbox folder
  * to his emails as attachments
  */
-Zarafa.plugins.desktop_notifications.DesktopNotificationsPlugin = Ext.extend(Zarafa.core.Plugin, {
+Zarafa.plugins.desktopnotifications.DesktopNotificationsPlugin = Ext.extend(Zarafa.core.Plugin, {
 	/**
 	 * initialises insertion point for plugin
 	 * @protected
 	 */
 	initPlugin : function()
 	{
-		Zarafa.plugins.desktop_notifications.DesktopNotificationsPlugin.superclass.initPlugin.apply(this, arguments);
+		Zarafa.plugins.desktopnotifications.DesktopNotificationsPlugin.superclass.initPlugin.apply(this, arguments);
 
 		this.registerInsertionPoint('context.settings.category.plugins', this.createSettingsWidget, this);
 	},
@@ -35,9 +35,9 @@ Zarafa.plugins.desktop_notifications.DesktopNotificationsPlugin = Ext.extend(Zar
 
 Zarafa.onReady(function() {
 	container.registerPlugin(new Zarafa.core.PluginMetaData({
-		name : 'desktop_notifications',
+		name : 'desktopnotifications',
 		displayName : _('Desktop Notifications Plugin'),
-		//about : Zarafa.plugins.desktop_notifications.ABOUT,
-		pluginConstructor : Zarafa.plugins.desktop_notifications.DesktopNotificationsPlugin
+		//about : Zarafa.plugins.desktopnotifications.ABOUT,
+		pluginConstructor : Zarafa.plugins.desktopnotifications.DesktopNotificationsPlugin
 	}));
 });
