@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE plugin SYSTEM "manifest.dtd">
+<plugin version="2">
+	<info>
+		<version>1.0</version>
+		<name>desktop_notifications</name>
+		<title>Desktop Notifications Plugin</title>
+		<author>Saket Patel</author>
+		<authorURL>https://github.com/silentsakky</authorURL>
+		<description>Allow the user to Desktop Notifications for different type of actions.</description>
+	</info>
+	<config>
+		<configfile>config.php</configfile>
+	</config>
+	<components>
+		<component>
+			<files>
+				<client>
+					<clientfile load="release">js/desktopnotifications.js</clientfile>
+					<clientfile load="debug">js/desktopnotifications-debug.js</clientfile>
+					<clientfile load="source">js/DesktopNotificationsPlugin.js</clientfile>
+					<clientfile load="source">js/NotificationSettingsWidget.js</clientfile>
+					<clientfile load="source">js/DesktopNotifications.js</clientfile>
+					<clientfile load="source">js/DesktopNotifier.js</clientfile>
+					<!-- <clientfile load="source">js/ABOUT.js</clientfile> -->
+				</client>
+				<resources>
+					<resourcefile load="release">resources/favicon.ico</resourcefile>
+				</resources>
+			</files>
+		</component>
+	</components>
+</plugin>

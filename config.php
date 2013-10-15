@@ -1,0 +1,3 @@
+<?php
+define('PLUGIN_DESKTOP_NOTIFICATION_USER_DEFAULT_ENABLE', false);
+?>
