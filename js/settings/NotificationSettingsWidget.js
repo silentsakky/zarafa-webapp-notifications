@@ -1,14 +1,14 @@
-Ext.namespace('Zarafa.plugins.desktopnotifications.js');
+Ext.namespace('Zarafa.plugins.desktopnotifications.js.settings');
 
 /**
- * @class Zarafa.plugins.desktopnotifications.js.NotificationSettingsWidget
+ * @class Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget
  * @extends Zarafa.settings.ui.SettingsWidget
  * @xtype zarafa.notificationsettingswidget
  *
  * The {@link Zarafa.settings.ui.SettingsWidget widget} for
  * configuring the settings of the plugin
  */
-Zarafa.plugins.desktopnotifications.js.NotificationSettingsWidget = Ext.extend(Zarafa.settings.ui.SettingsWidget, {
+Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget = Ext.extend(Zarafa.settings.ui.SettingsWidget, {
 
 	/**
 	 * @cfg {Zarafa.plugins.desktopnotifications.js.DesktopNotificationsPlugin} plugin The plugin which has registered this
@@ -43,7 +43,7 @@ Zarafa.plugins.desktopnotifications.js.NotificationSettingsWidget = Ext.extend(Z
 			items : this.createPanelItems()
 		});
 
-		Zarafa.plugins.desktopnotifications.js.NotificationSettingsWidget.superclass.constructor.call(this, config);
+		Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget.superclass.constructor.call(this, config);
 	},
 
 	/**
@@ -108,4 +108,4 @@ Zarafa.plugins.desktopnotifications.js.NotificationSettingsWidget = Ext.extend(Z
 	}
 });
 
-Ext.reg('zarafa.notificationsettingswidget', Zarafa.plugins.desktopnotifications.js.NotificationSettingsWidget);
+Ext.reg('zarafa.notificationsettingswidget', Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget);

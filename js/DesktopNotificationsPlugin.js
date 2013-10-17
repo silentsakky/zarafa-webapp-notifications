@@ -37,7 +37,7 @@ Zarafa.onReady(function() {
 	container.registerPlugin(new Zarafa.core.PluginMetaData({
 		name : 'desktopnotifications',
 		displayName : _('Desktop Notifications Plugin'),
-		//about : Zarafa.plugins.desktopnotifications.ABOUT,
+		about : Zarafa.plugins.desktopnotifications.ABOUT,
 		pluginConstructor : Zarafa.plugins.desktopnotifications.DesktopNotificationsPlugin
 	}));
 });
