@@ -62,6 +62,12 @@ Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget = Ext
 			handler : this.requestPermission,
 			scope : this,
 			ref : 'requestPermissionBtn'
+		}, {
+			xtype : 'button',
+			text : _('Restore Settings'),
+			handler : this.restoreSettings,
+			scope : this,
+			ref : 'restoreSettingsBtn'
 		}];
 	},
 
@@ -72,20 +78,27 @@ Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget = Ext
 	requestPermission : function()
 	{
 		Zarafa.plugins.desktopnotifications.js.DesktopNotification.authorize(function(perm) {
-			// chrome doesn't give us current permission level, so default to granted if permission level is passed
-			var permission = 'granted';
-			if(perm) {
-				permission = perm;
-			}
+			if(perm === 'granted') {
+				// update settings for new mail notification
+				this.model.set('zarafa/v1/main/notifier/info/newmail/value', 'desktopnotifier');
 
-			if(permission === 'granted') {
 				// update ui
 				this.update(this.model);
-
-				// update settings for new mail notification
-				container.getSettingsModel().set('zarafa/v1/main/notifier/info/newmail/value', 'desktopnotifier');
 			}
 		}.createDelegate(this));
+	},
+
+	/**
+	 * Function will be used to restore settings for new mail notifications, if user doesn't want
+	 * to use this desktop notifications.
+	 */
+	restoreSettings : function()
+	{
+		// restore settings for new mail notification
+		this.model.set('zarafa/v1/main/notifier/info/newmail/value', 'popup');
+
+		// update ui
+		this.update(this.model);
 	},
 
 	/**
@@ -99,12 +112,21 @@ Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget = Ext
 	{
 		this.model = settingsModel;
 
-		var disabled = false;
-		if(Zarafa.plugins.desktopnotifications.js.DesktopNotification.hasPermission()) {
-			disabled = true;
+		var setting = this.model.get('zarafa/v1/main/notifier/info/newmail/value');
+
+		var disabledPerm = false;
+		if(Zarafa.plugins.desktopnotifications.js.DesktopNotification.hasPermission() && setting === 'desktopnotifier') {
+			disabledPerm = true;
 		}
 
-		this.requestPermissionBtn.setDisabled(disabled);
+		this.requestPermissionBtn.setDisabled(disabledPerm);
+
+		var disableRestore = false;
+		if(setting !== 'desktopnotifier') {
+			disableRestore = true;
+		}
+
+		this.restoreSettingsBtn.setDisabled(disableRestore);
 	}
 });
 

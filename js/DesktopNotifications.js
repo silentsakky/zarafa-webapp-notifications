@@ -63,10 +63,18 @@ Zarafa.plugins.desktopnotifications.js.DesktopNotification = (function() {
 				alert('Browser doesn\'t support notifications');
 			}
 
-			callback = Ext.isFunction(callback) ? callback : Ext.emptyFn;
+			var callbackFn = Ext.isFunction(callback) ? function(perm) {
+				// chrome doesn't give us current permission level, so default to granted if permission level is passed
+				var permission = 'granted';
+				if(perm) {
+					permission = perm;
+				}
+
+				callback.apply(this, [permission]);
+			} : Ext.emptyFn;
 
 			if (Ext.isFunction(notificationAPI.requestPermission)) {
-				notificationAPI.requestPermission(callback);
+				notificationAPI.requestPermission(callbackFn);
 			}
 		},
 
