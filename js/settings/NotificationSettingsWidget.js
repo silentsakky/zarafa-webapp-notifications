@@ -34,7 +34,7 @@ Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget = Ext
 		Ext.applyIf(config, {
 			title : _('Desktop Notifications Settings Plugin'),
 			xtype: 'panel',
-			height : 125,
+			height : 150,
 			layout : {
 				type : 'vbox',
 				align : 'left',
@@ -63,11 +63,19 @@ Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget = Ext
 			scope : this,
 			ref : 'requestPermissionBtn'
 		}, {
-			xtype : 'button',
-			text : _('Restore Settings'),
-			handler : this.restoreSettings,
+			xtype : 'checkbox',
+			boxLabel : _('Enable desktop notifications for new mail'),
+			name : 'zarafa/v1/main/notifier/info/newmail/value',
+			handler : this.onChangeCheckbox,
 			scope : this,
-			ref : 'restoreSettingsBtn'
+			ref : 'newMailNotificationsCheck'
+		}, {
+			xtype : 'checkbox',
+			boxLabel : _('Enable desktop notifications for reminders'),
+			name : 'zarafa/v1/main/notifier/info/reminder/value',
+			handler : this.onChangeCheckbox,
+			scope : this,
+			ref : 'reminderNotificationsCheck'
 		}];
 	},
 
@@ -79,9 +87,6 @@ Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget = Ext
 	{
 		Zarafa.plugins.desktopnotifications.js.DesktopNotification.authorize(function(perm) {
 			if(perm === 'granted') {
-				// update settings for new mail notification
-				this.model.set('zarafa/v1/main/notifier/info/newmail/value', 'desktopnotifier');
-
 				// update ui
 				this.update(this.model);
 			}
@@ -89,13 +94,18 @@ Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget = Ext
 	},
 
 	/**
-	 * Function will be used to restore settings for new mail notifications, if user doesn't want
-	 * to use this desktop notifications.
+	 * Function will be used to enable/disable desktop notifications for new mail and reminder functionalities.
 	 */
-	restoreSettings : function()
+	onChangeCheckbox : function(checkbox, checked)
 	{
-		// restore settings for new mail notification
-		this.model.set('zarafa/v1/main/notifier/info/newmail/value', 'popup');
+		var type = 'popup';
+
+		if(checked) {
+			type = 'desktopnotifier';
+		}
+
+		// change setting for new mail/reminder notification
+		this.model.set(checkbox.name, type);
 
 		// update ui
 		this.update(this.model);
@@ -112,21 +122,20 @@ Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget = Ext
 	{
 		this.model = settingsModel;
 
-		var setting = this.model.get('zarafa/v1/main/notifier/info/newmail/value');
+		// enable/disable request permission button
+		var hasPermission = Zarafa.plugins.desktopnotifications.js.DesktopNotification.hasPermission();
 
-		var disabledPerm = false;
-		if(Zarafa.plugins.desktopnotifications.js.DesktopNotification.hasPermission() && setting === 'desktopnotifier') {
-			disabledPerm = true;
-		}
+		this.requestPermissionBtn.setDisabled(hasPermission);
 
-		this.requestPermissionBtn.setDisabled(disabledPerm);
+		this.newMailNotificationsCheck.setDisabled(!hasPermission);
+		this.reminderNotificationsCheck.setDisabled(!hasPermission);
 
-		var disableRestore = false;
-		if(setting !== 'desktopnotifier') {
-			disableRestore = true;
-		}
+		// check/uncheck checkboxes for newmail and reminder functionality
+		var newMailChecked = (this.model.get(this.newMailNotificationsCheck.name) === 'desktopnotifier');
+		this.newMailNotificationsCheck.setValue(newMailChecked);
 
-		this.restoreSettingsBtn.setDisabled(disableRestore);
+		var reminderChecked = (this.model.get(this.reminderNotificationsCheck.name) === 'desktopnotifier');
+		this.reminderNotificationsCheck.setValue(reminderChecked);
 	}
 });
 
