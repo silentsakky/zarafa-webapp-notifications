@@ -33,12 +33,9 @@ Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget = Ext
 
 		Ext.applyIf(config, {
 			title : _('Desktop Notifications Settings Plugin'),
-			xtype: 'panel',
-			height : 150,
-			layout : {
-				type : 'vbox',
-				align : 'left',
-				pack  : 'start'
+			xtype: 'form',
+			defaults : {
+				hideLabel : true
 			},
 			items : this.createPanelItems()
 		});
@@ -58,6 +55,7 @@ Zarafa.plugins.desktopnotifications.js.settings.NotificationSettingsWidget = Ext
 			fieldClass : 'x-form-display-field zarafa-settings-widget-extrainfo'
 		}, {
 			xtype : 'button',
+			width : 200,
 			text : _('Request Permissions'),
 			handler : this.requestPermission,
 			scope : this,
