@@ -15,19 +15,19 @@ Zarafa.plugins.desktopnotifications.DesktopNotificationsPlugin = Ext.extend(Zara
 	{
 		Zarafa.plugins.desktopnotifications.DesktopNotificationsPlugin.superclass.initPlugin.apply(this, arguments);
 
-		this.registerInsertionPoint('context.settings.category.plugins', this.createSettingsWidget, this);
+		this.registerInsertionPoint('context.settings.categories', this.createSettingsCategory, this);
 	},
 
 	/**
-	 * Return the instance of {@link Zarafa.plugins.pimfolder.PimPluginSettingsWidget}.
+	 * Return the instance of {@link Zarafa.plugins.desktopnotifications.js.settings.SettingsDesktopNotificationsCategory SettingsDesktopNotificationsCategory}.
 	 *
-	 * @return {Zarafa.plugins.pimfolder.PimPluginSettingswidget} An instance of the settings widget
+	 * @return {Zarafa.plugins.desktopnotifications.js.settings.SettingsDesktopNotificationsCategory} An instance of the settings category
 	 * @private
 	 */
-	createSettingsWidget : function()
+	createSettingsCategory : function()
 	{
 		return {
-			xtype : 'zarafa.notificationsettingswidget',
+			xtype : 'zarafa.settingsdesktopnotificationscategory',
 			plugin : this
 		};
 	}
