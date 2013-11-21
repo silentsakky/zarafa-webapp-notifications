@@ -32,6 +32,7 @@ Zarafa.plugins.desktopnotifications.js.DesktopNotification = (function() {
 		{
 			if(!this.supports()) {
 				console.log('Browser doesn\'t support notifications');
+				return;
 			}
 
 			var permission = 'default';
@@ -61,6 +62,7 @@ Zarafa.plugins.desktopnotifications.js.DesktopNotification = (function() {
 		{
 			if(!this.supports()) {
 				console.log('Browser doesn\'t support notifications');
+				return;
 			}
 
 			var callbackFn = Ext.isFunction(callback) ? function(perm) {
@@ -87,15 +89,20 @@ Zarafa.plugins.desktopnotifications.js.DesktopNotification = (function() {
 		 * 		- body : message to display
 		 *		- tag : tag to group same type of notifications so multiple notifications
 		 *				will not be showed multiple times
+		 * @param {Object} handlers object containing handler function that can be registered on instance of
+		 * notification object
+		 * 		- possible handlers are click, show, error, close
 		 */
-		notify : function(title, options)
+		notify : function(title, options, handlers)
 		{
 			if(!this.supports()) {
 				console.log('Browser doesn\'t support notifications');
+				return;
 			}
 
 			if(!this.hasPermission()) {
 				console.log('Permission is denied to show desktop notifications');
+				return;
 			}
 
 			var notification;
@@ -110,6 +117,12 @@ Zarafa.plugins.desktopnotifications.js.DesktopNotification = (function() {
 					body : options.body,
 					tag : options.tag
 				});
+			}
+
+			if(handlers) {
+				for(var key in handlers) {
+					notification['on' + key] = handlers[key];
+				}
 			}
 
 			// give audio feedback
