@@ -21,7 +21,7 @@ How to enable
 1. Go to settings section
 2. Go to Plugins tab
 3. Enable desktop notifications plugin and reload webapp
-4. Go to plugins tab of settings section
+4. Go to Desktop Notifications tab of settings section
 5. Click on request permission button
 6. Click allow in popup that is shown by browser
 7. One more step would be to select checkboxes for which you like to enable this functionality and then apply settings

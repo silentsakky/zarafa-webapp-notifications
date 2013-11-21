@@ -31,7 +31,7 @@ Zarafa.plugins.desktopnotifications.js.DesktopNotification = (function() {
 		hasPermission : function()
 		{
 			if(!this.supports()) {
-				alert('Browser doesn\'t support notifications');
+				console.log('Browser doesn\'t support notifications');
 			}
 
 			var permission = 'default';
@@ -60,7 +60,7 @@ Zarafa.plugins.desktopnotifications.js.DesktopNotification = (function() {
 		authorize : function(callback)
 		{
 			if(!this.supports()) {
-				alert('Browser doesn\'t support notifications');
+				console.log('Browser doesn\'t support notifications');
 			}
 
 			var callbackFn = Ext.isFunction(callback) ? function(perm) {
@@ -91,15 +91,16 @@ Zarafa.plugins.desktopnotifications.js.DesktopNotification = (function() {
 		notify : function(title, options)
 		{
 			if(!this.supports()) {
-				alert('Browser doesn\'t support notifications');
+				console.log('Browser doesn\'t support notifications');
 			}
 
 			if(!this.hasPermission()) {
-				alert('Permission is denied to show desktop notifications');
+				console.log('Permission is denied to show desktop notifications');
 			}
 
 			var notification;
 // autoclose, handlers
+//https://code.google.com/p/chromium/issues/detail?id=29643
 			if(Ext.isFunction(notificationAPI.createNotification)) {
 				notification = notificationAPI.createNotification(options.icon, title, options.body);
 				notification.show();
@@ -110,6 +111,20 @@ Zarafa.plugins.desktopnotifications.js.DesktopNotification = (function() {
 					tag : options.tag
 				});
 			}
+
+			// give audio feedback
+			this.audioTag = Ext.getBody().createChild({
+				tag : 'audio',
+				type : 'audio/ogg',
+				src : 'plugins/desktopnotifications/resources/audio.ogg',
+				autoplay : true
+			});
+
+			// destroy audio element when playback is completed
+			this.audioTag.on('ended', function() {
+				Ext.destroy(this.audioTag);
+				delete this.audioTag;
+			}, this);
 		}
 	};
 })();
