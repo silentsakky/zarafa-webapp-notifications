@@ -58,7 +58,7 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 			border : false,
 			items : [{
 				xtype : 'displayfield',
-				value : _('For enabling desktop notifications we need permissions from browser.'),
+				value : _('For enabling desktop notifications we need permissions from browser.')//,
 				//fieldClass : 'x-form-display-field zarafa-settings-widget-extrainfo'
 			}, {
 				xtype : 'button',
@@ -81,42 +81,6 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 				handler : this.onChangeCheckbox,
 				scope : this,
 				ref : '../reminderNotificationsCheck'
-			}, {
-				xtype: 'zarafa.compositefield',
-				plugins: [ 'zarafa.splitfieldlabeler' ],
-				// override defaults config
-				hideLabel : false,
-				// # TRANSLATORS: The {A} _must_ always be at the start of the translation
-				// # The '{B}' represents the number of minutes which the user will type in.
-				fieldLabel: _('{A}Auto close desktop notifications after {B} minute(s)'),
-				//labelWidth: 250,
-				items: [{
-					xtype : 'checkbox',
-					labelSplitter: '{A}',
-					//name : 'zarafa/v1/contexts/mail/autosave_enable',
-					//ref : '../autoSaveBox',
-					boxLabel : '',
-					hideLabel : true,
-					checked : true,
-					/*listeners : {
-						check : this.onAutoSaveCheckBoxChange,
-						change : this.onFieldChange,
-						scope : this
-					}*/
-				},{
-					xtype: 'zarafa.spinnerfield',
-					labelSplitter: '{B}',
-					//name : 'zarafa/v1/contexts/mail/autosave_time',
-					//ref : '../autoSaveTimeSpinner',
-					incrementValue: 1,
-					defaultValue: 0,
-					minValue : 0,
-					/*listeners: {
-						change: this.onFieldChange,
-						scope: this
-					},*/
-					plugins: ['zarafa.numberspinner']
-				}]
 			}]
 		}];
 	},

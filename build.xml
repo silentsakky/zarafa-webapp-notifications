@@ -110,6 +110,7 @@
 						var ngettext = function(msgid, msgid_plural, count) {};
 						var npgettext = function(msgctxt, msgid, msgid_plural, count) {};
 						var pgettext = function(msgctxt, msgid) {};
+						var console = function(str) {};
 					</externs>
 				</zCompile>
 			</then>
