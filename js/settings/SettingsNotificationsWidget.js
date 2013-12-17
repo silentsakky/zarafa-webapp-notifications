@@ -58,8 +58,7 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 			border : false,
 			items : [{
 				xtype : 'displayfield',
-				value : _('For enabling desktop notifications we need permissions from browser.')//,
-				//fieldClass : 'x-form-display-field zarafa-settings-widget-extrainfo'
+				value : _('For enabling desktop notifications we need permissions from browser.')
 			}, {
 				xtype : 'button',
 				width : 200,
@@ -104,6 +103,10 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 	 */
 	onChangeCheckbox : function(checkbox, checked)
 	{
+		if(!this.model) {
+			return;
+		}
+
 		var type = 'popup';
 
 		if(checked) {
@@ -111,7 +114,9 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 		}
 
 		// change setting for new mail/reminder notification
-		this.model.set(checkbox.name, type);
+		if (this.model.get(checkbox.name) !== type) {
+			this.model.set(checkbox.name, type);
+		}
 
 		// update ui
 		this.update(this.model);

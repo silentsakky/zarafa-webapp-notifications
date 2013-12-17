@@ -1,10 +1,7 @@
-## zarafa-webapp-notifications
+zarafa-webapp-notifications
+===========================
 
-Plugin to enable desktop notifications for webapp
-
-Have only been checked in latest versions of chrome and firefox in windows os
-
-There are also some differences how notifications work in chrome and firefox so you will find some behavioural difference between these two browsers
+Plugin to enable desktop like notifications for webapp (only tested in chrome and firefox in windows os)
 
 ## How to install
 1. If you want to use this plugin with production / debug version of webapp then please download package from [community](https://community.zarafa.com/pg/plugins/project/22240/developer/silentsakky/webapp-desktop-notifications-plugin)
@@ -36,3 +33,4 @@ There are also some differences how notifications work in chrome and firefox so 
 ## Notes
 - Currently only new mail & reminder notifications are supported
 - Feedback/Bug Reports are welcome
+- if anyone is good at creating icons then please help me add a good icon to desktop notifications tab (credits will be given)
